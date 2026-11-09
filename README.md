@@ -60,7 +60,7 @@ Experiments are structured into **use-cases**. Each becomes a `wintermute` sub-c
 | Command | Description |
 |---|---|
 | `WebTestingWithExplanation` | Autonomously tests a web page over HTTP while letting the LLM "talk" through its reasoning; includes an OWASP-style pentest playbook capability. |
-| `WebPostExploit` | A flag-free variant of `WebTestingWithExplanation` focused on **post-exploitation guided by MITRE ATT&CK**: it declares the ATT&CK technique (`MITRE: <id> <name>`) before each action and keeps enumerating and escalating to document impact, finishing only via the end-run capability. Registers **no flag-submission** capability. |
+| `WebPostExploit` | A flag-free variant of `WebTestingWithExplanation` focused on **post-exploitation guided by MITRE ATT&CK**: it declares the ATT&CK technique (`MITRE: <id> <name>`) before each action and keeps enumerating and escalating to document impact, finishing only via the end-run capability. Registers **no flag-submission** capability. Every HTTP request additionally carries the applied ATT&CK technique as a **structured `mitre_technique` field** captured in the tool-call trace (not only a prompt line), so the label survives context-window trimming. A **per-round availability healthcheck** probes the target each round and ends the run if the agent knocks the target offline, so it never keeps attacking a service it crashed. |
 | `WebTestingWithShell` | Web testing with shell access to a Kali-style attacker box. |
 | `AdvancedWebTesting` | A top-level agent with no direct target access that delegates work to bounded **sub-agents** via a sub-agent capability. |
 
